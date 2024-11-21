@@ -29,7 +29,7 @@ public class MainAppFXMLController {
     @FXML
     public void initialize() {
         logger.info("Initializing MainAppController...");
-        spaceShip = new Sprite(300, 750, 40, 40, "player", Color.BLUE);
+        spaceShip = new Sprite(300, 750, 40, 40, "player", Color.BLUE, 20);
         animationPanel.setPrefSize(600, 800);
         animationPanel.getChildren().add(spaceShip);
     }
@@ -82,7 +82,7 @@ public class MainAppFXMLController {
             Sprite invader = new Sprite(
                     90 + i * 100,
                     150, 30, 30, "enemy",
-                    Color.RED);
+                    Color.RED, 20);
             animationPanel.getChildren().add(invader);
         }
     }
