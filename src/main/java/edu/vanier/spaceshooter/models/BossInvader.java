@@ -6,4 +6,9 @@ public class BossInvader extends Invader{
     public BossInvader(int x, int y, int width, int height, String type, Color color, int health, String imagePath) {
         super(x, y, width, height, type, color, health, imagePath);
     }
+
+    @Override
+    public void movementPattern() {
+
+    }
 }

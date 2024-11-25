@@ -1,9 +1,7 @@
 package edu.vanier.spaceshooter.controllers;
 
-import edu.vanier.spaceshooter.models.Invader;
-import edu.vanier.spaceshooter.models.Missile;
-import edu.vanier.spaceshooter.models.Spaceship;
-import edu.vanier.spaceshooter.models.Sprite;
+import edu.vanier.spaceshooter.models.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -93,7 +91,7 @@ public class MainAppFXMLController {
 
     private void generateInvaders() {
         for (int i = 0; i < 5; i++) {
-            Invader invader = new Invader(
+            MinorInvader invader = new MinorInvader(
                     90 + i * 100,
                     150, 30, 30, "enemy",
                     Color.RED, 20,"/icons/PNG/Sprites/Ships/spaceShips_009.png");
