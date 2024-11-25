@@ -1,8 +1,12 @@
 package edu.vanier.spaceshooter.controllers;
 
+import edu.vanier.spaceshooter.models.Invader;
+import edu.vanier.spaceshooter.models.Missile;
 import edu.vanier.spaceshooter.models.Sprite;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -27,12 +31,13 @@ public class MainAppFXMLController {
     private Scene mainScene;
     AnimationTimer gameLoop;
     ArrayList<String> input = new ArrayList<>();
-
+    private long lastShot = 0; //Tracks time of last shot fired
+    private static final int COOLDOWN = 150; //Adjustable cooldown to prevent spam
 
     @FXML
     public void initialize() {
         logger.info("Initializing MainAppController...");
-        spaceShip = new Sprite(300, 750, 40, 40, "player", Color.BLUE, 20, "/icons/PNG/Sprites/Ships/spaceShips_001.png");
+        spaceShip = new Sprite(300, 750, 40, 40, "player", Color.BLUE, "/icons/PNG/Sprites/Ships/spaceShips_001.png");
         animationPanel.setPrefSize(600, 800);
         animationPanel.getChildren().add(spaceShip);
     }
@@ -82,11 +87,12 @@ public class MainAppFXMLController {
         });
 
 
+
     }
 
     private void generateInvaders() {
         for (int i = 0; i < 5; i++) {
-            Sprite invader = new Sprite(
+            Invader invader = new Invader(
                     90 + i * 100,
                     150, 30, 30, "enemy",
                     Color.RED, 20,"/icons/PNG/Sprites/Ships/spaceShips_009.png");
@@ -143,6 +149,13 @@ public class MainAppFXMLController {
         if (input.contains("DOWN") || input.contains("S")) {
             spaceShip.moveDown();
         }
+        if(input.contains("SPACE")){
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - lastShot >= COOLDOWN) {
+                shoot(spaceShip);
+                lastShot = currentTime; // Update the last shoot time
+            }
+        }
 
 
 
@@ -150,6 +163,7 @@ public class MainAppFXMLController {
         if (elapsedTime > 2) {
             elapsedTime = 0;
         }
+
     }
 
     private void processSprite(Sprite sprite) {
@@ -185,6 +199,8 @@ public class MainAppFXMLController {
         }
     }
 
+
+
     private void handleEnemyFiring(Sprite sprite) {
         if (elapsedTime > 2) {
             if (Math.random() < 0.3) {
@@ -208,6 +224,15 @@ public class MainAppFXMLController {
         });
     }
 
+    private void handlePlayerFiring(){
+        mainScene.setOnKeyPressed(KeyEvent->{
+            KeyCode getEvent = KeyEvent.getCode();
+            if(getEvent.equals(KeyCode.SPACE)){
+                shoot(spaceShip);
+            }
+        });
+    }
+
     /**
      * Creates and adds a bullet sprite fired by the specified entity.
      * <p>
@@ -221,13 +246,15 @@ public class MainAppFXMLController {
      * either an enemy or the spaceship.
      */
     private void shoot(Sprite firingEntity) {
+        Timer coolDown = new Timer();
         // The firing entity can be either an enemy or the sapceship.
-        Sprite bullet = new Sprite(
+        Missile missile = new Missile(
                 (int) firingEntity.getTranslateX() + 20,
                 (int) firingEntity.getTranslateY(),
                 5, 20,
-                firingEntity.getType() + "bullet", Color.BLACK, 10, "/icons/PNG/Sprites/Missiles/spaceMissiles_004.png");
-        animationPanel.getChildren().add(bullet);
+                firingEntity.getType() + "bullet", Color.BLACK, "/icons/PNG/Sprites/Missiles/spaceMissiles_004.png");
+        animationPanel.getChildren().add(missile);
+
     }
 
     public void setScene(Scene scene) {

@@ -1,7 +1,6 @@
 package edu.vanier.spaceshooter.models;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -12,7 +11,7 @@ public class Sprite extends Rectangle {
     private int health;
 
 
-    public Sprite(int x, int y, int width, int height, String type, Color color, int health, String imagePath) {
+    public Sprite(int x, int y, int width, int height, String type, Color color, String imagePath) {
         super(width, height, color);
         Image spriteImg = new Image(imagePath);
         this.health = health;
