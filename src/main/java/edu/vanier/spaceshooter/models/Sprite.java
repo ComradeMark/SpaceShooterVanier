@@ -12,7 +12,7 @@ public class Sprite extends Rectangle {
     private int health;
 
 
-    public Sprite(String imagePath, int x, int y, int width, int height, String type, Color color, int health) {
+    public Sprite(int x, int y, int width, int height, String type, Color color, int health, String imagePath) {
         super(width, height, color);
         Image spriteImg = new Image(imagePath);
         this.health = health;
@@ -20,6 +20,8 @@ public class Sprite extends Rectangle {
         setTranslateX(x);
         setTranslateY(y);
     }
+
+
 
     public void moveLeft() {
         setTranslateX(getTranslateX() - 5);

@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import org.slf4j.Logger;
@@ -25,11 +26,13 @@ public class MainAppFXMLController {
     private Sprite spaceShip;
     private Scene mainScene;
     AnimationTimer gameLoop;
+    ArrayList<String> input = new ArrayList<>();
+
 
     @FXML
     public void initialize() {
         logger.info("Initializing MainAppController...");
-        spaceShip = new Sprite(300, 750, 40, 40, "player", Color.BLUE, 20);
+        spaceShip = new Sprite(300, 750, 40, 40, "player", Color.BLUE, 20, "/icons/PNG/Sprites/Ships/spaceShips_001.png");
         animationPanel.setPrefSize(600, 800);
         animationPanel.getChildren().add(spaceShip);
     }
@@ -65,16 +68,20 @@ public class MainAppFXMLController {
      */
     private void setupKeyPressHandlers() {
         // e the key event containing information about the key pressed.
-        mainScene.setOnKeyPressed(e -> {
-            switch (e.getCode()) {
-                case KeyCode.A ->
-                    spaceShip.moveLeft();
-                case KeyCode.D ->
-                    spaceShip.moveRight();
-                case KeyCode.SPACE ->
-                    shoot(spaceShip);
+        mainScene.setOnKeyPressed((KeyEvent e) -> {
+            String code = e.getCode().toString();
+            if (!input.contains(code)) {
+                input.add(code);
             }
         });
+
+        mainScene.setOnKeyReleased((KeyEvent e) -> {
+            String code = e.getCode().toString();
+            input.remove(code);
+            update();
+        });
+
+
     }
 
     private void generateInvaders() {
@@ -82,7 +89,7 @@ public class MainAppFXMLController {
             Sprite invader = new Sprite(
                     90 + i * 100,
                     150, 30, 30, "enemy",
-                    Color.RED, 20);
+                    Color.RED, 20,"/icons/PNG/Sprites/Ships/spaceShips_009.png");
             animationPanel.getChildren().add(invader);
         }
     }
@@ -122,6 +129,22 @@ public class MainAppFXMLController {
         // Actions to be performed during each frame of the animation.
         getSprites().forEach(this::processSprite);
         removeDeadSprites();
+
+        // game logic
+        if (input.contains("LEFT") || input.contains("A")) {
+            spaceShip.moveLeft();
+        }
+        if (input.contains("RIGHT") || input.contains("D")) {
+            spaceShip.moveRight();
+                }
+        if (input.contains("UP") || input.contains("W")) {
+            spaceShip.moveUp();
+        }
+        if (input.contains("DOWN") || input.contains("S")) {
+            spaceShip.moveDown();
+        }
+
+
 
         // Reset the elapsed time.
         if (elapsedTime > 2) {
@@ -203,7 +226,7 @@ public class MainAppFXMLController {
                 (int) firingEntity.getTranslateX() + 20,
                 (int) firingEntity.getTranslateY(),
                 5, 20,
-                firingEntity.getType() + "bullet", Color.BLACK);
+                firingEntity.getType() + "bullet", Color.BLACK, 10, "/icons/PNG/Sprites/Missiles/spaceMissiles_004.png");
         animationPanel.getChildren().add(bullet);
     }
 
