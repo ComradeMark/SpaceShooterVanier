@@ -1,23 +1,27 @@
 package edu.vanier.spaceshooter.models;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class Sprite extends Rectangle {
+public class Sprite extends ImageView {
 
     private boolean dead = false;
     private final String type;
     private int health;
-
-
+    public int centreX;
+    public int centreY;
     public Sprite(int x, int y, int width, int height, String type, Color color, String imagePath) {
-        super(width, height, color);
         Image spriteImg = new Image(imagePath);
         this.health = health;
         this.type = type;
         setTranslateX(x);
         setTranslateY(y);
+        imageProperty().setValue(new Image(imagePath));
+        centreX = x/2;
+        centreY = y/2;
+
     }
 
 

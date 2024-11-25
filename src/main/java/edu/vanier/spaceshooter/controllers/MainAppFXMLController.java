@@ -2,6 +2,7 @@ package edu.vanier.spaceshooter.controllers;
 
 import edu.vanier.spaceshooter.models.Invader;
 import edu.vanier.spaceshooter.models.Missile;
+import edu.vanier.spaceshooter.models.Spaceship;
 import edu.vanier.spaceshooter.models.Sprite;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class MainAppFXMLController {
     @FXML
     public void initialize() {
         logger.info("Initializing MainAppController...");
-        spaceShip = new Sprite(300, 750, 40, 40, "player", Color.BLUE, "/icons/PNG/Sprites/Ships/spaceShips_001.png");
+        spaceShip = new Spaceship(300, 750, 40, 40, "player", Color.BLUE, 20, "/icons/PNG/Sprites/Ships/spaceShips_001.png");
         animationPanel.setPrefSize(600, 800);
         animationPanel.getChildren().add(spaceShip);
     }
@@ -152,7 +153,9 @@ public class MainAppFXMLController {
         if(input.contains("SPACE")){
             long currentTime = System.currentTimeMillis();
             if (currentTime - lastShot >= COOLDOWN) {
-                shoot(spaceShip);
+                if(!spaceShip.isDead()){
+                    shoot(spaceShip);
+                }
                 lastShot = currentTime; // Update the last shoot time
             }
         }
@@ -194,6 +197,7 @@ public class MainAppFXMLController {
                 if (sprite.getBoundsInParent().intersects(enemy.getBoundsInParent())) {
                     enemy.setDead(true);
                     sprite.setDead(true);
+
                 }
             }
         }
@@ -224,14 +228,6 @@ public class MainAppFXMLController {
         });
     }
 
-    private void handlePlayerFiring(){
-        mainScene.setOnKeyPressed(KeyEvent->{
-            KeyCode getEvent = KeyEvent.getCode();
-            if(getEvent.equals(KeyCode.SPACE)){
-                shoot(spaceShip);
-            }
-        });
-    }
 
     /**
      * Creates and adds a bullet sprite fired by the specified entity.
@@ -247,10 +243,10 @@ public class MainAppFXMLController {
      */
     private void shoot(Sprite firingEntity) {
         Timer coolDown = new Timer();
-        // The firing entity can be either an enemy or the sapceship.
+        // The firing entity can be either an enemy or the spaceship.
         Missile missile = new Missile(
-                (int) firingEntity.getTranslateX() + 20,
-                (int) firingEntity.getTranslateY(),
+                (int) (firingEntity.getTranslateX() + 45),
+                (int) (firingEntity.getTranslateY() - 10),
                 5, 20,
                 firingEntity.getType() + "bullet", Color.BLACK, "/icons/PNG/Sprites/Missiles/spaceMissiles_004.png");
         animationPanel.getChildren().add(missile);
