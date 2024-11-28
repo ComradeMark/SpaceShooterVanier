@@ -93,7 +93,7 @@ public class MainAppFXMLController {
         for (int i = 0; i < 5; i++) {
             MinorInvader invader = new MinorInvader(
                     90 + i * 100,
-                    150, 30, 30, "enemy",
+                    150, 55, 55, "enemy",
                     Color.RED, 20,"/icons/PNG/Sprites/Ships/spaceShips_009.png");
             animationPanel.getChildren().add(invader);
         }
@@ -243,7 +243,7 @@ public class MainAppFXMLController {
         Timer coolDown = new Timer();
         // The firing entity can be either an enemy or the spaceship.
         Missile missile = new Missile(
-                (int) (firingEntity.getTranslateX() + 45),
+                (int) (firingEntity.getTranslateX() + firingEntity.getFitWidth()/2),
                 (int) (firingEntity.getTranslateY() - 10),
                 5, 20,
                 firingEntity.getType() + "bullet", Color.BLACK, "/icons/PNG/Sprites/Missiles/spaceMissiles_004.png");

@@ -12,7 +12,13 @@ public class Sprite extends ImageView {
     private int health;
     public int centreX;
     public int centreY;
+    private double width;
+    private double height;
+
     public Sprite(int x, int y, int width, int height, String type, Color color, String imagePath) {
+        super();
+        setFitWidth(width);
+        setFitHeight(height);
         Image spriteImg = new Image(imagePath);
         this.health = health;
         this.type = type;

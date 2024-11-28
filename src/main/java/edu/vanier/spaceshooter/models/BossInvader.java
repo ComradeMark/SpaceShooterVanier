@@ -8,6 +8,12 @@ public class BossInvader extends Invader{
     }
 
     @Override
+    public void takeDamage(int damage) {
+        this.health = health - damage;
+
+    }
+
+    @Override
     public void movementPattern() {
 
     }
