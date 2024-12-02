@@ -30,6 +30,8 @@ public class MainAppFXMLController {
     private Scene mainScene;
     AnimationTimer gameLoop;
     ArrayList<String> input = new ArrayList<>();
+    ArrayList<Invader> enemies = new ArrayList<>();
+
     private long lastShot = 0; //Tracks time of last shot fired
     private static final int COOLDOWN = 150; //Adjustable cooldown to prevent spam
 
@@ -96,6 +98,7 @@ public class MainAppFXMLController {
                     150, 55, 55, "enemy",
                     Color.RED, 20,"/icons/PNG/Sprites/Ships/spaceShips_009.png");
             animationPanel.getChildren().add(invader);
+            enemies.add(invader);
         }
     }
 
@@ -134,6 +137,11 @@ public class MainAppFXMLController {
         // Actions to be performed during each frame of the animation.
         getSprites().forEach(this::processSprite);
         removeDeadSprites();
+        for (Invader invader : enemies){
+
+            invader.movementPattern();
+
+        }
 
         // game logic
         if (input.contains("LEFT") || input.contains("A")) {
@@ -156,6 +164,7 @@ public class MainAppFXMLController {
                 }
                 lastShot = currentTime; // Update the last shoot time
             }
+
         }
 
 
@@ -176,6 +185,8 @@ public class MainAppFXMLController {
             case "enemy" ->
                 handleEnemyFiring(sprite);
         }
+
+
     }
 
     private void handleEnemyBullet(Sprite sprite) {
