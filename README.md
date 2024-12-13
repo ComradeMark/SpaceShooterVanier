@@ -1,6 +1,6 @@
 # Vanier Space Shooter Project
 
-This is the final programming (420-203) project for Vanier College by Mark Moutter, ID# 2354983
+This is the final programming (420-203) assignment for Vanier College by Mark Moutter, ID# 2354983
 
 JavaFX version 20
 
