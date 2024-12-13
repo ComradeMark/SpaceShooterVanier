@@ -5,7 +5,8 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,9 @@ public class SpaceShooterApp extends Application {
             controller = new MainAppFXMLController();
             loader.setController(controller);
             Pane root = loader.load();
+            Image image = new Image("/fxml/background.jpg");
+            Background background = new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)));
+            root.setBackground(background);
             //-- 2) Create and set the scene to the stage.
             Scene scene = new Scene(root, 1000, 1000);
             controller.setScene(scene);
@@ -35,6 +39,8 @@ public class SpaceShooterApp extends Application {
             primaryStage.setAlwaysOnTop(true);
             primaryStage.show();
             primaryStage.setAlwaysOnTop(false);
+
+
         } catch (IOException ex) {
             logger.error(ex.getMessage(), ex);
         }

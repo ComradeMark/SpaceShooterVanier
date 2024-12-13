@@ -8,6 +8,14 @@ public abstract class Invader extends Sprite {
     protected int yPos;
 
     public int health;
+    /**
+Takes charge of properties of Invader sprites
+     * <p>
+     All sprites courtesy of Kenney.nl:
+     https://www.kenney.nl/assets?q=2d
+
+     * </p>
+     */
 
     public Invader(int xPos, int yPos, int width, int height, String type, Color color, int health, String imagePath) {
         super(xPos, yPos, width, height, type, color, imagePath);

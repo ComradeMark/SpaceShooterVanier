@@ -25,28 +25,37 @@ public class Sprite extends ImageView {
         setTranslateX(x);
         setTranslateY(y);
         imageProperty().setValue(new Image(imagePath));
-        centreX = x/2;
-        centreY = y/2;
+        centreX = x / 2;
+        centreY = y / 2;
 
     }
-
 
 
     public void moveLeft() {
-        setTranslateX(getTranslateX() - 5);
-    }
+            setTranslateX(getTranslateX() - 5);
+
+
+}
 
     public void moveRight() {
-        setTranslateX(getTranslateX() + 5);
-    }
+
+            setTranslateX(getTranslateX() + 5);
+        }
+
 
     public void moveUp() {
-        setTranslateY(getTranslateY() - 5);
-    }
+
+
+            setTranslateY(getTranslateY() - 5);
+        }
+
 
     public void moveDown() {
-        setTranslateY(getTranslateY() + 5);
-    }
+
+            setTranslateY(getTranslateY() + 5);
+
+        }
+
 
     public boolean isDead() {
         return dead;
