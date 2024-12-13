@@ -1,27 +1,28 @@
-# JavaFX Project Template
+# Vanier Space Shooter Project
 
-This is a non-modular, Gradle-based project skeleton for creating JavaFX applications.
+This is the final programming (420-203) project for Vanier College by Mark Moutter, ID# 2354983
 
-It uses `JavaFX 20.0.2`, and includes the [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html) (no need to install Gradle locally).
+JavaFX version 20
 
-## Features
+## Building
 
-- JavaFX-aware coding assistance (code completion, search, navigation in JavaFX-specific source files)
-- Logging with [Logback](https://logback.qos.ch/).
-- Support for FXML.
-- Access to JavaFX's JavaDoc from within your IDE.
+- Build the project by downloading the complete repository ZIP file and opening it in an IDE of choice
+- Ensure Gradle is supported and up-to-date
+- Run project after setting proper Gradle build configuration
 
-## Using this Project Template
+## Known bugs
 
-1. Clone this repository
-2. Remove the `.git` directory 
-3. Add the cloned directory structure to your local repo (if you already have one)
-4. Open the project with NetBeans
-5. Using NetBeans, build the project to resolve the dependencies
-6. Change the project name in `settings.gradle`
-7. Rename the default Java package in `MainApp.java` and `MainAppController.java`.
-8. Change the value of the `mainClass` class property in `build.gradle`. A fully-qualified name of the class containing the main method that you want to run must be supplied.
+Several bugs have been left in the final project implementation and would have been corrected had better time management been employed.
+These bugs should be considered in grading and contribute to a lower mark.
 
-## NetBeans
+1. Holding the space-bar during Game Over screen (activating Restart button) causes improper enemy spawning mechanics
+2. Burst-fire (alternate fire mode) functionality was NOT implememented due to optimization issues with the feature (lowered frame rates)
+ 
 
-This project template was tested with `NetBeans 17` and `JDK 18`.
+## Various sources and credits
+
+- Background image courtesy of NASA 
+
+- 2D assets courtesy of kenney.nl (https://www.kenney.nl/assets?q=2d)
+
+- Sound effects courtesy of Pixabay (https://pixabay.com/sound-effects/search/laser/)
